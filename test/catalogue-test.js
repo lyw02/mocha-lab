@@ -18,7 +18,7 @@ describe("Catalogue", () => {
         cat.addProduct(new Product("A123", "Product 1", 100, 10, 10.0));
         cat.addProduct(new Product("A124", "Product 2", 100, 10.0));
         cat.addProduct(new Product("A125", "Product 3", 100, 10, 10.0));
-        console.log('before block')
+        // console.log('before block')
     });
     describe("findProductById", function () {
         it("should find a valid product id", function () {
@@ -99,6 +99,18 @@ describe("Catalogue", () => {
             // Target state
             let rejectedProduct = cat.findProductById("A126");
             expect(rejectedProduct).to.be.undefined; 
+        });
+    });
+    describe("search", () => {
+        beforeEach(() => {
+            cat = new Catalogue("Test Catalogue");
+            cat.addProduct(new Product("E123", "Product 1", 100, 10, 10.0));
+            cat.addProduct(new Product("E124", "Shoes", 100, 10, 99.0));
+            cat.addProduct(new Product("E125", "Product 3", 100, 10, 10.0));
+        });
+        it("should return products cheaper than price", () => {
+            let result = cat.search({price: 25.00}).map((p) => p.id);
+            expect(result).to.have.members(["E123", "E125"]);
         });
     });
 });
