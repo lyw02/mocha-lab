@@ -61,6 +61,8 @@ export class Catalogue {
       const result = this.products
         .filter((p) => p.name.includes(criteria.keyword) === true);
       return result;
+    } else {
+      throw new Error("Bad Search");
     }
   }
 }

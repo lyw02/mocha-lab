@@ -116,5 +116,9 @@ describe("Catalogue", () => {
             let result = cat.search({keyword: "sho"}).map((p) => p.id);
             expect(result).to.have.members(["E124"]);
         });
+        it("should throw an exception when criteria has no price or keyword", () => {
+            let testCriteria = {};
+            expect(() => cat.search(testCriteria)).to.throw("Bad Search");
+        });
     });
 });
