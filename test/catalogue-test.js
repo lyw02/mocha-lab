@@ -105,12 +105,16 @@ describe("Catalogue", () => {
         beforeEach(() => {
             cat = new Catalogue("Test Catalogue");
             cat.addProduct(new Product("E123", "Product 1", 100, 10, 10.0));
-            cat.addProduct(new Product("E124", "Shoes", 100, 10, 99.0));
+            cat.addProduct(new Product("E124", "shoes", 100, 10, 99.0));
             cat.addProduct(new Product("E125", "Product 3", 100, 10, 10.0));
         });
         it("should return products cheaper than price", () => {
             let result = cat.search({price: 25.00}).map((p) => p.id);
             expect(result).to.have.members(["E123", "E125"]);
+        });
+        it("should return products with keyword in the name", () => {
+            let result = cat.search({keyword: "sho"}).map((p) => p.id);
+            expect(result).to.have.members(["E124"]);
         });
     });
 });

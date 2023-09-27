@@ -21,7 +21,7 @@ export class Catalogue {
     const removedProduct = this.findProductById(id);
     if (removedProduct) {
       this.products = this.products.filter(
-        (product) => product.id !== id 
+        (product) => product.id !== id
       );
     }
     return removedProduct;
@@ -43,7 +43,7 @@ export class Catalogue {
       throw new Error("Bad Batch");
     }
     const noProductsAdded = batch.products
-      .filter((product) => product.quantityInStock > 0 )
+      .filter((product) => product.quantityInStock > 0)
       .filter((p) => {
         this.addProduct(p);
         return true;
@@ -53,9 +53,14 @@ export class Catalogue {
   }
 
   search(criteria) {
-    const result = this.products
-      .filter((p) => p.price < criteria.price)
-      .map((p) => this.findProductById(p.id));
-    return result;
+    if (Object.keys(criteria).length === 1 && criteria.price !== undefined) {
+      const result = this.products
+        .filter((p) => p.price < criteria.price);
+      return result;
+    } else if (Object.keys(criteria).length === 1 && criteria.keyword !== undefined) {
+      const result = this.products
+        .filter((p) => p.name.includes(criteria.keyword) === true);
+      return result;
+    }
   }
 }
