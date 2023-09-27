@@ -1,6 +1,7 @@
 {
   "name": "unit-test-mocha",
   "version": "1.0.0",
+  "type": "module",
   "description": "Unit testing with Mocha and Chai ",
   "scripts": {
     "test": "mocha test/catalogue-test.js"

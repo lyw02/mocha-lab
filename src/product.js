@@ -1,4 +1,4 @@
-class Product {
+export class Product {
     constructor(id,name,initialQuantity, reorderLevel, price) {
         this.id = id;
         this.name = name;
@@ -7,6 +7,3 @@ class Product {
         this.reorderLevel = reorderLevel
     }
 }
-
-
-module.exports = Product;
